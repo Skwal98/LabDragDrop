@@ -1,0 +1,16 @@
+<p>drag works!</p>
+<div class="example-container" cdkDropListGroup>
+  <div
+    class="ex"
+    cdkDropList
+    *ngFor="let item of items"
+    (cdkDropListDropped)="drop($event)"
+    (cdkDropListEntered)="enter($event)"
+  >
+    <div cdkDrag [style.background]="item.color" class="example-box">
+      {{ item.index }}
+    </div>
+  </div>
+</div>
+oldDropElement: {{ oldDropElement }} <br />oldContainer: {{ oldContainer }}
+<br />startDragContainer: {{ startDragContainer }}
