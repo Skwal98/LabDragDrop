@@ -1,4 +1,8 @@
-import { CdkDragDrop, CdkDragEnter } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  CdkDragEnter,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
 
 @Component({
@@ -10,18 +14,47 @@ export class DragComponent {
   public items: Array<Ele>;
 
   constructor() {
-    this.items = [...Array(100).keys()].map(
+    this.items = [...Array(16).keys()].map(
       (x, i) => new Ele(x, randomColor(0.2))
     );
   }
 
   drop(ev: CdkDragDrop<unknown>) {
+    console.log('Drop from: ' + this.dragIndex + ' to ' + this.dropIndex);
+    if (this.dragIndex == this.dropIndex) {
+      return;
+    }
+
+    if (this.dropIndex! > this.dragIndex!) {
+      for (let i = this.dropIndex!; i > this.dragIndex!; i--) {
+        console.log('move from: ' + (i - 1) + ' to ' + i);
+
+        const nextContainer = this.getContainer(i - 1);
+        const length = nextContainer?.children.length;
+
+        const element = this.getElementFromContainer(i - 1, length! - 1);
+        this.getContainer(i)!.appendChild(element!);
+      }
+    } else {
+      for (let i = this.dropIndex!; i < this.dragIndex!; i++) {
+        console.log('move from: ' + (i + 1) + ' to ' + i);
+
+        const nextContainer = this.getContainer(i + 1);
+        const length = nextContainer?.children.length;
+
+        const element = this.getElementFromContainer(i + 1, length! - 1);
+        this.getContainer(i)!.appendChild(element!);
+      }
+    }
+
+    moveItemInArray(this.items, this.dragIndex!, this.dropIndex!);
+
     this.oldDropElement = undefined;
     this.oldContainer = undefined;
     this.startDragContainer = undefined;
     this.commonDragIndex = undefined;
-
-    // this.getContainer(0)!.removeChild(this.getElementFromContainer(0, 0)!);
+    this.dragIndex = undefined;
+    this.dropIndex = undefined;
   }
 
   oldDropElement?: Element;

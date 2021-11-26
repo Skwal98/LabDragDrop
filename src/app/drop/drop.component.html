@@ -1,1 +1,17 @@
-<p>drop works!</p>
+<div>
+  <span *ngFor="let a of items" style="display: inline">{{ a }}</span>
+</div>
+
+<div class="example-container" cdkDropListGroup>
+  <div
+    class="ex"
+    cdkDropList
+    *ngFor="let item of items"
+    (cdkDropListDropped)="drop($event)"
+    (cdkDropListEntered)="enter($event)"
+  >
+    <div cdkDrag class="example-box">
+      {{ item }}
+    </div>
+  </div>
+</div>
