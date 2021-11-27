@@ -10,6 +10,7 @@ import { randomColor } from '../utils';
 })
 export class DragComponent {
   public items: Array<Ele>;
+  public isHandle!: boolean;
 
   constructor() {
     this.items = [...Array(16).keys()].map(

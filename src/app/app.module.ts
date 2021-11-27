@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { DropComponent } from './drop/drop.component';
 import { DragComponent } from './drag/drag.component';
 import { DragGridDirectiveDirective } from './drag-grid.directive';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { DragGridDirectiveDirective } from './drag-grid.directive';
     DragComponent,
     DragGridDirectiveDirective,
   ],
-  imports: [BrowserModule, AppRoutingModule, DragDropModule],
+  imports: [BrowserModule, AppRoutingModule, DragDropModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
