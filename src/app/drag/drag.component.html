@@ -3,14 +3,12 @@
   <div
     class="ex"
     cdkDropList
+    dragGrid
+    (dragGridDropped)="dropped($event)"
     *ngFor="let item of items"
-    (cdkDropListDropped)="drop($event)"
-    (cdkDropListEntered)="enter($event)"
   >
     <div cdkDrag [style.background]="item.color" class="example-box">
       {{ item.index }}
     </div>
   </div>
 </div>
-oldDropElement: {{ oldDropElement }} <br />oldContainer: {{ oldContainer }}
-<br />startDragContainer: {{ startDragContainer }}
